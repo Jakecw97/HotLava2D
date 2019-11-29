@@ -89,6 +89,8 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
+        playerAnimation.SetFloat("Movement", Mathf.Abs(rigidBody.velocity.x));
+        playerAnimation.SetBool("OnTheGround", isTouchingGround);
     }
     private void Flip()
     {

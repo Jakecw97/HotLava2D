@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 660902185}
   - component: {fileID: 660902187}
   - component: {fileID: 660902186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772036228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.98, y: -0.4, z: 0}
+  m_LocalPosition: {x: -3.98, y: -1.108, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 1974467727}
@@ -697,7 +697,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -748,13 +748,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789d5a066361163429a73d2653d74cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  jumpSpeed: 7
+  speed: 5
+  jumpSpeed: 10
   groundCheckPoint: {fileID: 1974467727}
-  groundCheckRadius: 1
+  groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   respawnPoint: {x: 0, y: 0, z: 0}
   gameLevelManager: {fileID: 514370899}
 --- !u!1 &1678285347
@@ -927,7 +927,7 @@ GameObject:
   - component: {fileID: 1715142360}
   - component: {fileID: 1715142359}
   - component: {fileID: 1715142361}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1287,7 +1287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974467726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.228, z: 0}
+  m_LocalPosition: {x: 0, y: -0.186, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 772036231}
