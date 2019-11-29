@@ -9,10 +9,16 @@ AnimatorController:
   m_Name: B500-2
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Hit
-    m_Type: 4
+  - m_Name: Destroy
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: PAl
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 1
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   m_AnimatorLayers:
@@ -37,7 +43,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Hit
+    m_ConditionEvent: Destroy
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: PAl
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102845932137757136}
@@ -166,7 +175,7 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102845932137757136}
-    m_Position: {x: 443, y: 269, z: 0}
+    m_Position: {x: 444, y: 264, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
