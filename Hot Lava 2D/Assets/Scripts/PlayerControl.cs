@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     public float groundCheckRadius; // Radius of Player ground check
     public LayerMask groundLayer; // jump off things added to this layer
     private bool isTouchingGround;
+    public Transform ropeTransform; //Rope
 
     private Animator playerAnimation;
     public Vector3 respawnPoint; //Store position of where player is going to respawn to
@@ -49,8 +50,7 @@ public class PlayerControl : MonoBehaviour
         isTouchingGround = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
         movement = Input.GetAxis("Horizontal");
 
-        if (!this.playerAnimation.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-        {
+       
             //will only move if keys left or right are pressed
             if (movement > 0f)
             {  //right
@@ -88,9 +88,25 @@ public class PlayerControl : MonoBehaviour
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
             }
 
+        /*void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.tag == "Rope")
+            {
+                col.collider.transform.SetParent(transform);
+            }
         }
+        void OnCollisionExit2D(Collision2D col)
+        {
+            if (col.gameObject.tag == "Rope")
+            {
+                transform.parent = null;
+            }
+        }*/
         playerAnimation.SetFloat("Movement", Mathf.Abs(rigidBody.velocity.x));
         playerAnimation.SetBool("OnTheGround", isTouchingGround);
+
+       
+
     }
     private void Flip()
     {
