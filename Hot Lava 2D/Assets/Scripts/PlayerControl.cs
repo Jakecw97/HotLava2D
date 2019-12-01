@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class PlayerControl : MonoBehaviour
     private float movement = 0f;
    // private float direction = 1f; //instantiated to allow projectiles to work
     private Rigidbody2D rigidBody;
+
+    public int maxHp;
+    public int currentHp;
+    public Image[] hearts;
     private bool isDead;
     private bool facingRight;
 
@@ -36,10 +41,6 @@ public class PlayerControl : MonoBehaviour
         //Player assets
         rigidBody = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<Animator>();
-
-        //When game loads, respawn point is set to position of player
-      //  respawnPoint = transform.position;
-
         gameLevelManager = FindObjectOfType<LevelManager>();
 
     }
@@ -105,10 +106,45 @@ public class PlayerControl : MonoBehaviour
         playerAnimation.SetFloat("Movement", Mathf.Abs(rigidBody.velocity.x));
         playerAnimation.SetBool("OnTheGround", isTouchingGround);
 
-       
 
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+        if (currentHp <= 0)
+        {
+            isDead = true;
+        }
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < currentHp)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
+    
+
+
+}
+
+    private IEnumerator OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Lava")
+        {
+            float damage = 1 * Time.deltaTime;
+            currentHp -= (int)System.Math.Floor(damage);
+            yield return new WaitForSeconds(1);
+
+        }
+        if (other.tag == "Ground")
+        {
+        }
     }
-    private void Flip()
+        private void Flip()
     {
         transform.Rotate(0f, 180f, 0f);
     }
