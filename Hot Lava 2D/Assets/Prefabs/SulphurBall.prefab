@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7164021537966832345}
   m_Layer: 0
   m_Name: SulphurBall
-  m_TagString: Lava
+  m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

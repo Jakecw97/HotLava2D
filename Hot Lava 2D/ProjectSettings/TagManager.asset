@@ -9,6 +9,8 @@ TagManager:
   - KeyHolder
   - Key
   - Lava
+  - Fireball
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

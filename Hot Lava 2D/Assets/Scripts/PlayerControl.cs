@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     public Image[] hearts;
     private bool isDead;
     private bool facingRight;
+    bool canTakeDamage = true;
 
     public Transform groundCheckPoint; //Bottom of player, checking if theyre on the ground
     public float groundCheckRadius; // Radius of Player ground check
@@ -130,21 +131,39 @@ public class PlayerControl : MonoBehaviour
 
 
 }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Fireball")
+        {
+            if (canTakeDamage)
+            {
+                currentHp -= 1;
+                StartCoroutine(WaitForSeconds());
 
-    private IEnumerator OnTriggerStay2D(Collider2D other)
+            }
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Lava")
         {
-            float damage = 1 * Time.deltaTime;
-            currentHp -= (int)System.Math.Floor(damage);
-            yield return new WaitForSeconds(1);
-
+            if(canTakeDamage)
+            {
+                currentHp -= 1;
+                StartCoroutine(WaitForSeconds());
+               
+            }
         }
-        if (other.tag == "Ground")
-        {
-        }
+       
     }
-        private void Flip()
+
+    private IEnumerator WaitForSeconds()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSecondsRealtime(1);
+        canTakeDamage = true;
+    }
+    private void Flip()
     {
         transform.Rotate(0f, 180f, 0f);
     }
