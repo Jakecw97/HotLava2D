@@ -11,6 +11,9 @@ TagManager:
   - Lava
   - Fireball
   - LevelEnd
+  - MusicSlider
+  - SFXSlider
+  - RopeHold
   layers:
   - Default
   - TransparentFX

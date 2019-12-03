@@ -24,17 +24,17 @@ public class PlayerControl : MonoBehaviour
     public float groundCheckRadius; // Radius of Player ground check
     public LayerMask groundLayer; // jump off things added to this layer
     private bool isTouchingGround;
-    public Transform ropeTransform; //Rope
+    public Transform ropeHoldPoint;
+
 
     private Animator playerAnimation;
-    public Vector3 respawnPoint; //Store position of where player is going to respawn to
     public LevelManager gameLevelManager;
+    
 
 
+    //  private float waitTime = 3f;
 
-  //  private float waitTime = 3f;
 
-  
 
 
     private void Start()
@@ -43,7 +43,6 @@ public class PlayerControl : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<Animator>();
         gameLevelManager = FindObjectOfType<LevelManager>();
-
     }
 
     private void Update()
@@ -131,6 +130,17 @@ public class PlayerControl : MonoBehaviour
 
 
 }
+
+    void OnParticleCollision(GameObject test)
+    {
+        if (canTakeDamage)
+        {
+            currentHp -= 1;
+            StartCoroutine(WaitForSeconds());
+
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Fireball")
@@ -142,7 +152,9 @@ public class PlayerControl : MonoBehaviour
 
             }
         }
-    }
+        
+        }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Lava")
@@ -154,8 +166,10 @@ public class PlayerControl : MonoBehaviour
                
             }
         }
-       
+    
+
     }
+    
 
     private IEnumerator WaitForSeconds()
     {
