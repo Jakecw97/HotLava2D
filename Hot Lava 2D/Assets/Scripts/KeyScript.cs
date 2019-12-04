@@ -16,12 +16,17 @@ public class KeyScript : MonoBehaviour
         spring.enabled = false;
         //Binds key to Keyholder
         spring.connectedBody = keyHolder.GetComponent<Rigidbody2D>();
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            //Stops sound from playing every time the key touches player
+            if (spring.enabled == false)
+                FindObjectOfType<SoundScript>().Play("collectable");
+
             spring.enabled = true;
         }
     }

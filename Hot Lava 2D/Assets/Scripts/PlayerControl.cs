@@ -55,17 +55,11 @@ public class PlayerControl : MonoBehaviour
             //will only move if keys left or right are pressed
             if (movement > 0f)
             {  //right
-               // direction = 1f;
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
-
-
             }
             else if (movement < 0f)
             { //left
-               // direction = -1f;
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
-
-
             }
             else
             { //dont move if none of keys are pressed
@@ -86,23 +80,10 @@ public class PlayerControl : MonoBehaviour
             //Jump, can check all inputs in Edit->Project Settings->Input
             if (Input.GetButtonDown("Jump") && isTouchingGround == true)
             {
+                FindObjectOfType<SoundScript>().Play("jump");
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
             }
 
-        /*void OnCollisionEnter2D(Collision2D col)
-        {
-            if (col.gameObject.tag == "Rope")
-            {
-                col.collider.transform.SetParent(transform);
-            }
-        }
-        void OnCollisionExit2D(Collision2D col)
-        {
-            if (col.gameObject.tag == "Rope")
-            {
-                transform.parent = null;
-            }
-        }*/
         playerAnimation.SetFloat("Movement", Mathf.Abs(rigidBody.velocity.x));
         playerAnimation.SetBool("OnTheGround", isTouchingGround);
 
@@ -126,21 +107,26 @@ public class PlayerControl : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
-    
+        if (isDead == true)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 
 
-}
+}//Update
 
     void OnParticleCollision(GameObject test)
     {
         if (canTakeDamage)
         {
             currentHp -= 1;
+            FindObjectOfType<SoundScript>().Play("damage");
             StartCoroutine(WaitForSeconds());
 
         }
     }
 
+   
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Fireball")
@@ -148,12 +134,12 @@ public class PlayerControl : MonoBehaviour
             if (canTakeDamage)
             {
                 currentHp -= 1;
+                FindObjectOfType<SoundScript>().Play("damage");
                 StartCoroutine(WaitForSeconds());
 
             }
-        }
-        
-        }
+        }    
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -162,15 +148,13 @@ public class PlayerControl : MonoBehaviour
             if(canTakeDamage)
             {
                 currentHp -= 1;
+                FindObjectOfType<SoundScript>().Play("damage");
                 StartCoroutine(WaitForSeconds());
                
             }
         }
-    
-
     }
     
-
     private IEnumerator WaitForSeconds()
     {
         canTakeDamage = false;

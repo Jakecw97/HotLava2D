@@ -79,10 +79,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 557071121751414871, guid: f95774aa79c834549a277c598b76d7a8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 557071121751414871, guid: f95774aa79c834549a277c598b76d7a8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.87652856
+      objectReference: {fileID: 0}
+    - target: {fileID: 557071121751414871, guid: f95774aa79c834549a277c598b76d7a8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.11792451
+      objectReference: {fileID: 0}
     - target: {fileID: 1300807907328147958, guid: f95774aa79c834549a277c598b76d7a8,
         type: 3}
       propertyPath: m_GravityScale
-      value: 0.2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300807907328147958, guid: f95774aa79c834549a277c598b76d7a8,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2378354198584487474, guid: f95774aa79c834549a277c598b76d7a8, type: 3}

@@ -9,6 +9,7 @@ public class SoundScript : MonoBehaviour
 {
     public Sound[] sounds;
     public AudioClip audioClip;
+    public AudioMixerGroup mixer;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class SoundScript : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.audioClip;
-
+            s.source.outputAudioMixerGroup = mixer; 
         }
     }
     public void Play(string name)

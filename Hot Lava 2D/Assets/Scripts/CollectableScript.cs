@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleScript : MonoBehaviour
+public class CollectableScript : MonoBehaviour
 {
     private LevelManager gameLevelManager;
     public int collectable = 1;
@@ -23,7 +23,7 @@ public class CollectibleScript : MonoBehaviour
     {
         if (other.tag == "Player")
         { //only objects with Player tag can destroy object
-            FindObjectOfType<SoundScript>().Play("collect");
+            FindObjectOfType<SoundScript>().Play("collectable");
             gameLevelManager.AddCollectable(collectable); //call addDragonBall from LevelManager and pass int value to it
             Destroy(gameObject);
         }

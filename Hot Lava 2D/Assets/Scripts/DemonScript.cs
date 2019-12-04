@@ -9,7 +9,7 @@ public class DemonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelEnd = GameObject.FindGameObjectWithTag("levelEnd").transform;
+       // levelEnd = GameObject.FindGameObjectWithTag("LevelEnd").transform;
     }
 
     // Update is called once per frame

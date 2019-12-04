@@ -17,30 +17,23 @@ public class DemonFireball : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        target = new Vector2(player.position.x, player.position.y);
+        target = (player.transform.position - transform.position).normalized *speed;
     }
 
     private void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-       ;
 
-        if (transform.position.x == target.x && transform.position.y == target.y)
-        {
-
-            DestroyProjectile();
-        }
+        Destroy(gameObject, 3f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.tag=="Player")
+        {
+            Destroy(gameObject);
+        }
         
-    }
-
-    void DestroyProjectile()
-    {
-        Destroy(gameObject);
-
     }
 }
 

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public float respawnDelay = 1;
     public PlayerControl gamePlayer; //referring to player_move script and object it is attached to
     public int collectable;
     public Text scoreText;
