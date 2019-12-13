@@ -7,7 +7,7 @@ public class GameOverScipt : MonoBehaviour
 {
    public void SelectRetry()
     {
-
+        SceneManager.LoadScene("LevelOne");
     }
     
     public void SelectQuit()

@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class PlayerControl : MonoBehaviour
 {
     //variables
     public float speed = 0f;
     public float jumpSpeed = 6f;
     private float movement = 0f;
-   // private float direction = 1f; //instantiated to allow projectiles to work
+    private float jump = 0f;
+    private float mobileMovement = 0f;
+   
+    // private float direction = 1f; //instantiated to allow projectiles to work
     private Rigidbody2D rigidBody;
 
     public int maxHp;
@@ -24,18 +28,14 @@ public class PlayerControl : MonoBehaviour
     public float groundCheckRadius; // Radius of Player ground check
     public LayerMask groundLayer; // jump off things added to this layer
     private bool isTouchingGround;
-    public Transform ropeHoldPoint;
+    public Joystick joystick;
+    public Joystick joystick2;
+
 
 
     private Animator playerAnimation;
     public LevelManager gameLevelManager;
     
-
-
-    //  private float waitTime = 3f;
-
-
-
 
     private void Start()
     {
@@ -50,10 +50,11 @@ public class PlayerControl : MonoBehaviour
         // if player is touching ground = true, if not = false
         isTouchingGround = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
         movement = Input.GetAxis("Horizontal");
-
+        mobileMovement = joystick.Horizontal;
+        jump = joystick2.Vertical;
        
             //will only move if keys left or right are pressed
-            if (movement > 0f)
+            if (movement > 0f )
             {  //right
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
             }
@@ -61,7 +62,15 @@ public class PlayerControl : MonoBehaviour
             { //left
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
             }
-            else
+            else if (mobileMovement > 0f)
+            { //left
+                rigidBody.velocity = new Vector2(mobileMovement * speed, rigidBody.velocity.y);
+            }
+            else if (mobileMovement < 0f)
+            { //left
+                rigidBody.velocity = new Vector2(mobileMovement * speed, rigidBody.velocity.y);
+            }
+        else
             { //dont move if none of keys are pressed
                 rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
             }
@@ -75,10 +84,20 @@ public class PlayerControl : MonoBehaviour
                 facingRight = false;
                 Flip();
             }
+            else if (mobileMovement < 0f && !facingRight)
+            {
+                facingRight = true;
+                Flip();
+            }
+            else if (mobileMovement > 0f && facingRight)
+            {
+                facingRight = false;
+                Flip();
+            }
 
 
-            //Jump, can check all inputs in Edit->Project Settings->Input
-            if (Input.GetButtonDown("Jump") && isTouchingGround == true)
+        //Jump, can check all inputs in Edit->Project Settings->Input
+        if (jump >= .4f && isTouchingGround == true || Input.GetButtonDown("Jump") && isTouchingGround == true)
             {
                 FindObjectOfType<SoundScript>().Play("jump");
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
